@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url("https://img.freepik.com/free-vector/notepaper-pencil-pattern-background_53876-115606.jpg?semt=ais_hybrid");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .email,.no,.pass,.name,.username{
+            width: 15%;
+            border: 2px solid none;
+            padding: 15px;
+            margin-bottom: 2%;
+        }
+        .user {
+            width: 7%;
+            border: 2px;
+            padding: 15px;
+            margin-bottom: 5%;
+            background-color: red;
+        }
+        .container{
+           text-align: center;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form method="POST">
+    <h1>CREATE ACCOUNT</h1>
+        <p>
+            <input  class="username" type="text" name="username" placeholder="Enter username">
+        </p>
+        <p><input class="email" type="email" name="email" placeholder="Enter  Your email"></p>
+        <p><input class="no" type="text" name="password" placeholder="Enter your password"></p>
+        <p><input class="pass" type="password" name="cpassword" placeholder="Confirm Password"></p>
+        <p><button class="user">submit</button></p>
+    </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Notes Dashboard</title>
+    {% block addcss %} {% endblock %}
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: aqua;
+            color:black;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color:black;
+            font-size: 1rem;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: #0056b3;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            padding: 5px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .search-bar button {
+            padding: 5px 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #0056b3;
+            color: white;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #003f7f;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .content {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .content h2 {
+            margin-top: 0;
+            font-size: 1.8rem;
+            color: #333;
+        }
+
+        .content p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <h1>Simple Notes Management</h1>
+        <div class="nav-links">
+            <a href="{{url_for('dashboard')}}">Home</a>
+
+            <div class="dropdown">
+                <a href="#">Notes</a>
+            <div class="dropdown-content">
+                <a href="{{url_for('addnotes')}}">Add Note</a>
+            <a href="{{url_for('viewallnotes')}}">View All Notes</a>
+            </div>
+            </div>
+            <div class="dropdown">
+                <a href="#">Files</a>
+                <div class="dropdown-content">
+                    <a href="{{url_for('uploadfile')}}">Upload</a>
+                    <a href="{{url_for('viewallfiles')}}">view all files</a>
+                    <a href="{{url_for('getexceldata')}}">Excel</a>
+                </div>
+            </div>
+        </div>
+        <form action="{{url_for('search')}}" method="POST">
+        <div class="search-bar">
+            <input type="text" name='sname' placeholder="Search notes...">
+            <button type="submit">Search</button>
+        </form>
+        </div>
+   
+        <a href="{{url_for('logout')}}"><button>Logout</button></a>
+    </div>
+
+    <div class="content">
+        <h2>Welcome to Your Dashboard {{session.get('user')}}</h2>
+    </div>
+</body>
+    {% block content %} {% endblock %}
+    {% if sdata %}
+    <table class="notes-table" border="1px">
+        <thead>
+          <tr>
+            <th>NotesID</th>
+            <th>Title</th>
+            <th>Created_At</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in sdata %}
+          <tr>
+              <td>{{i[0]}}</td>
+              <td>{{i[1]}}</td>
+              <td>{{i[3]}}</td>
+              <td><a href="{{url_for('viewnotes',n_id=i[0])}}">view</a></td>
+              <td><a href="{{url_for('updatenotes',n_id=i[0])}}">update</a></td>
+              <td><a href="{{url_for('deletenotes',n_id=i[0])}}">delete</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+
+
+</html>

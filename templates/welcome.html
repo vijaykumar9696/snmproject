@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-image: url("https://png.pngtree.com/background/20210711/original/pngtree-cartoon-blackboard-minimalistic-green-banner-background-picture-image_1074970.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+
+    }
+    .welcome{
+        color:white;
+        text-align: center;
+        font-size: 50px;
+        margin-bottom: 5%;
+        margin-top: 150px;
+    }
+    .route-links{
+        text-align: center;
+        padding: 15px;
+        
+    }
+    .create{
+        padding: 15px;
+        border-radius: 15px;
+        width: 90px;
+        background-color: yellow;
+        margin-right: 30px;
+    }
+    .log{
+        padding: 15px;
+        border-radius: 15px;
+        width: 90px;
+        background-color: aqua;
+    }
+</style>
+<body>
+    <h1 class="welcome">Welcome To  Simple Notes Management</h1>
+    <div class="route-links">
+        <a href="{{url_for('create')}}"><button class="create">Create</button></a>
+        <a href="{{url_for('login')}}"><button class="log">Login</button></a>
+    </div>
+</body>
+</html>
